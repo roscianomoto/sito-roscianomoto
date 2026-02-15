@@ -1,0 +1,31 @@
+import type { ModelData } from "@/lib/models/types";
+
+export function AudienceFit({ model }: { model: ModelData }) {
+  const s = model.sections.audienceFit;
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+      <div style={card}>
+        <h3 style={h3}>Ideale se</h3>
+        <ul>{s.idealIf.map((x) => <li key={x}>{x}</li>)}</ul>
+      </div>
+      <div style={card}>
+        <h3 style={h3}>Meno indicata se</h3>
+        <ul>{s.notIdealIf.map((x) => <li key={x}>{x}</li>)}</ul>
+      </div>
+      <div style={{ ...card, gridColumn: "1 / -1" }}>
+        <h3 style={h3}>Uso tipico</h3>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+          {s.typicalUse.map((x) => <span key={x} style={pill}>{x}</span>)}
+        </div>
+      </div>
+
+      <style>{`
+        @media (max-width: 900px) { div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; } }
+      `}</style>
+    </div>
+  );
+}
+
+const card: React.CSSProperties = { border: "1px solid #eee", borderRadius: 16, padding: 16 };
+const h3: React.CSSProperties = { marginTop: 0, marginBottom: 10, fontSize: 18 };
+const pill: React.CSSProperties = { border: "1px solid #e5e5e5", padding: "6px 10px", borderRadius: 999, fontSize: 13 };
